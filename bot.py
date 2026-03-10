@@ -1,4 +1,5 @@
 import os
+import json
 import textwrap
 from datetime import datetime, timezone
 
@@ -28,10 +29,11 @@ KEYWORDS = [
 ]
 
 DISCORD_WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL", "")
-OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-5.4")
+OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4.1-mini")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
 MAX_CANDIDATES = 20
 MAX_OUTPUT_ITEMS = 5
+HISTORY_FILE = "sent_articles.json"
 
 
 def now_jst() -> str:
@@ -40,6 +42,21 @@ def now_jst() -> str:
 
 def normalize_text(text: str) -> str:
     return " ".join((text or "").lower().split())
+
+
+def load_history() -> set[str]:
+    try:
+        with open(HISTORY_FILE, "r", encoding="utf-8") as f:
+            return set(json.load(f))
+    except FileNotFoundError:
+        return set()
+    except json.JSONDecodeError:
+        return set()
+
+
+def save_history(history: set[str]) -> None:
+    with open(HISTORY_FILE, "w", encoding="utf-8") as f:
+        json.dump(sorted(list(history)), f, ensure_ascii=False, indent=2)
 
 
 def score_entry(title: str, summary: str) -> int:
@@ -52,7 +69,9 @@ def score_entry(title: str, summary: str) -> int:
 
 
 def fetch_rss_items() -> list[dict]:
+    sent_history = load_history()
     items = []
+
     for url in RSS_FEEDS:
         feed = feedparser.parse(url)
         for entry in feed.entries:
@@ -60,7 +79,8 @@ def fetch_rss_items() -> list[dict]:
             summary = getattr(entry, "summary", "")
             link = getattr(entry, "link", "")
             scored = score_entry(title, summary)
-            if scored > 0:
+
+            if scored > 0 and link and link not in sent_history:
                 items.append(
                     {
                         "title": title,
@@ -127,6 +147,7 @@ def build_prompt(items: list[dict]) -> str:
 def summarize_with_openai(items: list[dict]) -> str:
     if not OPENAI_API_KEY:
         raise RuntimeError("OPENAI_API_KEY が設定されていません。")
+
     client = OpenAI(api_key=OPENAI_API_KEY)
     prompt = build_prompt(items)
 
@@ -134,7 +155,21 @@ def summarize_with_openai(items: list[dict]) -> str:
         model=OPENAI_MODEL,
         input=prompt,
     )
-    return response.output_text.strip()
+
+    if hasattr(response, "output_text") and response.output_text:
+        return response.output_text.strip()
+
+    texts = []
+    for item in getattr(response, "output", []) or []:
+        for content in getattr(item, "content", []) or []:
+            text = getattr(content, "text", None)
+            if text:
+                texts.append(text)
+
+    if texts:
+        return "\n".join(texts).strip()
+
+    raise RuntimeError(f"OpenAI response をテキスト化できませんでした: {response}")
 
 
 def post_to_discord(message: str) -> None:
@@ -158,11 +193,24 @@ def post_to_discord(message: str) -> None:
         res.raise_for_status()
 
 
+def update_history(sent_items: list[dict]) -> None:
+    history = load_history()
+    for item in sent_items:
+        link = item.get("link")
+        if link:
+            history.add(link)
+    save_history(history)
+
+
 def main() -> None:
     print(f"[{now_jst()}] ニュース収集開始")
+    print(f"OPENAI_MODEL={OPENAI_MODEL}")
+    print(f"OPENAI_API_KEY_SET={bool(OPENAI_API_KEY)}")
+    print(f"DISCORD_WEBHOOK_URL_SET={bool(DISCORD_WEBHOOK_URL)}")
+
     items = fetch_rss_items()
     if not items:
-        print("候補記事が見つかりませんでした。")
+        print("新しい候補記事が見つかりませんでした。")
         return
 
     digest = summarize_with_openai(items)
@@ -171,6 +219,10 @@ def main() -> None:
 
     print(final_message)
     post_to_discord(final_message)
+
+    sent_items = items[:MAX_OUTPUT_ITEMS]
+    update_history(sent_items)
+
     print("完了")
 
 
