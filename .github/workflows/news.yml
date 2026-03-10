@@ -5,6 +5,9 @@ on:
   schedule:
     - cron: "0 23 * * *"
 
+permissions:
+  contents: write
+
 jobs:
   run-bot:
     runs-on: ubuntu-latest
@@ -12,6 +15,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          persist-credentials: true
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -23,6 +28,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install openai feedparser requests
 
+      - name: Ensure history file exists
+        run: |
+          if [ ! -f sent_articles.json ]; then
+            echo "[]" > sent_articles.json
+          fi
+
       - name: Run bot
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
@@ -30,3 +41,11 @@ jobs:
           OPENAI_MODEL: gpt-4.1-mini
         run: |
           python bot.py
+
+      - name: Commit updated history
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add sent_articles.json
+          git diff --cached --quiet || git commit -m "Update sent article history"
+          git push
