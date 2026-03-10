@@ -1,7 +1,9 @@
 import json
 import os
+import re
 import textwrap
 from datetime import datetime
+from urllib.parse import quote
 from zoneinfo import ZoneInfo
 
 import feedparser
@@ -22,6 +24,9 @@ KEYWORDS = [
     "deepseek",
     "llama",
     "gemma",
+    "mistral",
+    "mixtral",
+    "phi",
     "vllm",
     "rag",
     "ai agent",
@@ -29,6 +34,7 @@ KEYWORDS = [
     "inference",
     "gpu",
     "cuda",
+    "tensorrt",
     "open source ai",
     "open-source ai",
 ]
@@ -37,7 +43,10 @@ DISCORD_WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL", "")
 OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4.1-mini")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
 
-MAX_CANDIDATES = 25
+MAX_INITIAL_CANDIDATES = 20
+MAX_SEARCH_QUERIES = 3
+MAX_SEARCH_RESULTS_PER_QUERY = 5
+MAX_FINAL_CANDIDATES = 30
 MAX_OUTPUT_ITEMS = 5
 HISTORY_FILE = "sent_articles.json"
 
@@ -77,11 +86,25 @@ def score_entry(title: str, summary: str) -> int:
     return score
 
 
-def fetch_rss_items() -> list[dict]:
-    sent_history = load_history()
+def extract_json_object(text: str) -> dict:
+    text = text.strip()
+
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        pass
+
+    match = re.search(r"\{.*\}", text, re.DOTALL)
+    if match:
+        return json.loads(match.group(0))
+
+    raise ValueError("JSONオブジェクトを抽出できませんでした。")
+
+
+def fetch_feed_items(feed_urls: list[str], sent_history: set[str]) -> list[dict]:
     items = []
 
-    for url in RSS_FEEDS:
+    for url in feed_urls:
         feed = feedparser.parse(url)
         source_name = getattr(feed.feed, "title", url)
 
@@ -107,19 +130,130 @@ def fetch_rss_items() -> list[dict]:
                 }
             )
 
-    seen_titles = set()
+    return items
+
+
+def dedupe_items(items: list[dict], limit: int) -> list[dict]:
+    seen_title = set()
+    seen_link = set()
     unique_items = []
+
     for item in sorted(items, key=lambda x: x["score"], reverse=True):
-        key = normalize_text(item["title"])
-        if key in seen_titles:
+        title_key = normalize_text(item["title"])
+        link_key = item["link"].strip()
+
+        if title_key in seen_title or link_key in seen_link:
             continue
-        seen_titles.add(key)
+
+        seen_title.add(title_key)
+        seen_link.add(link_key)
         unique_items.append(item)
 
-    return unique_items[:MAX_CANDIDATES]
+    return unique_items[:limit]
 
 
-def build_prompt(items: list[dict]) -> str:
+def fetch_initial_candidates(sent_history: set[str]) -> list[dict]:
+    items = fetch_feed_items(RSS_FEEDS, sent_history)
+    return dedupe_items(items, MAX_INITIAL_CANDIDATES)
+
+
+def build_search_query_prompt(items: list[dict]) -> str:
+    bullets = []
+    for i, item in enumerate(items, start=1):
+        bullets.append(
+            f"[{i}] {item['title']} | source={item['source']} | link={item['link']}"
+        )
+
+    joined = "\n".join(bullets)
+
+    return textwrap.dedent(
+        f"""
+        あなたはAIニュースの調査担当です。
+        以下の候補記事を見て、追加調査すべき検索クエリを最大{MAX_SEARCH_QUERIES}個だけ作成してください。
+
+        条件:
+        - 英語の短い検索クエリ
+        - AI/ローカルLLM/GPU/AIエージェント関連を優先
+        - 曖昧すぎる語は避ける
+        - 重複クエリは避ける
+        - JSONのみで返す
+        - 形式:
+        {{
+          "queries": ["query1", "query2"]
+        }}
+
+        候補記事:
+        {joined}
+        """
+    ).strip()
+
+
+def propose_search_queries_with_openai(client: OpenAI, items: list[dict]) -> list[str]:
+    if not items:
+        return []
+
+    response = client.responses.create(
+        model=OPENAI_MODEL,
+        input=build_search_query_prompt(items),
+    )
+
+    text = response.output_text.strip() if getattr(response, "output_text", None) else ""
+    data = extract_json_object(text)
+    queries = data.get("queries", [])
+
+    cleaned = []
+    for q in queries:
+        q = str(q).strip()
+        if q and q not in cleaned:
+            cleaned.append(q)
+
+    return cleaned[:MAX_SEARCH_QUERIES]
+
+
+def build_google_news_rss_url(query: str) -> str:
+    encoded = quote(query)
+    return f"https://news.google.com/rss/search?q={encoded}&hl=en-US&gl=US&ceid=US:en"
+
+
+def fetch_search_results(queries: list[str], sent_history: set[str]) -> list[dict]:
+    items = []
+
+    for query in queries:
+        rss_url = build_google_news_rss_url(query)
+        feed = feedparser.parse(rss_url)
+        source_name = f"Google News Search: {query}"
+
+        count = 0
+        for entry in feed.entries:
+            if count >= MAX_SEARCH_RESULTS_PER_QUERY:
+                break
+
+            title = getattr(entry, "title", "")
+            summary = getattr(entry, "summary", "")
+            link = getattr(entry, "link", "")
+
+            if not link or link in sent_history:
+                continue
+
+            scored = score_entry(title, summary)
+            if scored <= 0:
+                scored = 1  # 検索ヒット分として最低スコア付与
+
+            items.append(
+                {
+                    "title": title,
+                    "summary": summary,
+                    "link": link,
+                    "score": scored + 1,
+                    "source": source_name,
+                }
+            )
+            count += 1
+
+    return items
+
+
+def build_selection_prompt(items: list[dict]) -> str:
     bullets = []
     for i, item in enumerate(items, start=1):
         bullets.append(
@@ -139,31 +273,18 @@ def build_prompt(items: list[dict]) -> str:
 
     return textwrap.dedent(
         f"""
-        あなたはAI/ローカルLLM/GPUニュース専門の編集者です。
-        候補記事の中から重要度の高いものを最大{MAX_OUTPUT_ITEMS}件選び、
-        Discord向けに日本語で簡潔にまとめてください。
+        あなたはAIニュース編集長です。
+        候補記事から、今日送るべき重要ニュースを最大{MAX_OUTPUT_ITEMS}件選んでください。
 
-        ルール:
-        - 日本語で出力
-        - 誇張しない
-        - ローカルLLM、GPU推論、AIエージェント、OSS AI を優先
-        - 同じ話題はまとめる
-        - 出力形式は必ず以下
-
-        1. 見出し
-        ・何が起きたか
-        ・なぜ重要か
-        ・URL
-
-        2. 見出し
-        ・何が起きたか
-        ・なぜ重要か
-        ・URL
-
-        最後に必ず以下を入れる:
-        ---
-        今日のひとこと:
-        〇〇
+        条件:
+        - AI、ローカルLLM、GPU推論、AIエージェント、OSS AIを優先
+        - 同じ話題の重複は避ける
+        - JSONのみで返す
+        - index は上の候補番号を使う
+        - 形式:
+        {{
+          "selected_indexes": [1, 3, 5]
+        }}
 
         候補記事:
         {joined}
@@ -171,16 +292,83 @@ def build_prompt(items: list[dict]) -> str:
     ).strip()
 
 
-def summarize_with_openai(items: list[dict]) -> str:
-    if not OPENAI_API_KEY:
-        raise RuntimeError("OPENAI_API_KEY が設定されていません。")
-
-    client = OpenAI(api_key=OPENAI_API_KEY)
-    prompt = build_prompt(items)
-
+def choose_top_items_with_openai(client: OpenAI, items: list[dict]) -> list[dict]:
     response = client.responses.create(
         model=OPENAI_MODEL,
-        input=prompt,
+        input=build_selection_prompt(items),
+    )
+
+    text = response.output_text.strip() if getattr(response, "output_text", None) else ""
+    data = extract_json_object(text)
+    indexes = data.get("selected_indexes", [])
+
+    selected = []
+    for idx in indexes:
+        try:
+            i = int(idx) - 1
+            if 0 <= i < len(items):
+                selected.append(items[i])
+        except (ValueError, TypeError):
+            continue
+
+    # 念のため再重複除去
+    return dedupe_items(selected, MAX_OUTPUT_ITEMS)
+
+
+def build_summary_prompt(selected_items: list[dict], queries: list[str]) -> str:
+    bullets = []
+    for i, item in enumerate(selected_items, start=1):
+        bullets.append(
+            textwrap.dedent(
+                f"""
+                [{i}]
+                title: {item['title']}
+                source: {item['source']}
+                link: {item['link']}
+                summary: {item['summary']}
+                """
+            ).strip()
+        )
+
+    joined = "\n\n".join(bullets)
+    query_text = ", ".join(queries) if queries else "なし"
+
+    return textwrap.dedent(
+        f"""
+        あなたはAI/ローカルLLM/GPUニュース専門の編集者です。
+        以下の選定済み記事を、Discord向けに日本語でわかりやすく要約してください。
+
+        ルール:
+        - 日本語で出力
+        - 誇張しない
+        - 各ニュースは以下の形式にする
+
+        1. 見出し
+        ・何が起きたか
+        ・なぜ重要か
+        ・URL
+
+        - 最後に必ず以下を入れる
+
+        ---
+        今日のひとこと:
+        〇〇
+
+        - 検索で深掘りしたクエリ:
+        {query_text}
+
+        選定済み記事:
+        {joined}
+        """
+    ).strip()
+
+
+def summarize_selected_items_with_openai(
+    client: OpenAI, selected_items: list[dict], queries: list[str]
+) -> str:
+    response = client.responses.create(
+        model=OPENAI_MODEL,
+        input=build_summary_prompt(selected_items, queries),
     )
 
     if hasattr(response, "output_text") and response.output_text:
@@ -243,23 +431,43 @@ def main() -> None:
     print(f"OPENAI_API_KEY_SET={bool(OPENAI_API_KEY)}")
     print(f"DISCORD_WEBHOOK_URL_SET={bool(DISCORD_WEBHOOK_URL)}")
 
-    items = fetch_rss_items()
-    print(f"候補記事数: {len(items)}")
+    if not OPENAI_API_KEY:
+        raise RuntimeError("OPENAI_API_KEY が設定されていません。")
 
-    if not items:
-        print("新しい候補記事が見つかりませんでした。")
+    client = OpenAI(api_key=OPENAI_API_KEY)
+    sent_history = load_history()
+
+    initial_items = fetch_initial_candidates(sent_history)
+    print(f"初期候補記事数: {len(initial_items)}")
+
+    if not initial_items:
+        print("新しい初期候補記事が見つかりませんでした。")
         return
 
-    digest = summarize_with_openai(items)
+    search_queries = propose_search_queries_with_openai(client, initial_items)
+    print(f"追加検索クエリ: {search_queries}")
+
+    search_items = fetch_search_results(search_queries, sent_history)
+    print(f"追加検索記事数: {len(search_items)}")
+
+    all_candidates = dedupe_items(initial_items + search_items, MAX_FINAL_CANDIDATES)
+    print(f"最終候補記事数: {len(all_candidates)}")
+
+    selected_items = choose_top_items_with_openai(client, all_candidates)
+    print(f"選定記事数: {len(selected_items)}")
+
+    if not selected_items:
+        print("送信対象の記事が選ばれませんでした。")
+        return
+
+    digest = summarize_selected_items_with_openai(client, selected_items, search_queries)
     header = f"📡 AIニュース速報 ({now_jst_str()})\n"
     final_message = header + "\n" + digest
 
     print(final_message)
     post_to_discord(final_message)
 
-    sent_items = items[:MAX_OUTPUT_ITEMS]
-    update_history(sent_items)
-
+    update_history(selected_items)
     print("履歴を更新しました。")
     print("完了")
 
