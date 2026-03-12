@@ -1,9 +1,9 @@
 {
   "last_topics": [
-    "Anthropic gives Claude shared context across Microsoft Excel and PowerPoint, enabling reusable workflows in multiple applications",
-    "Google's Gemini Embedding 2 arrives with native multimodal support to cut costs and speed up your enterprise data stack",
-    "Manufact raises $6.3M as MCP becomes the ‘USB-C for AI’ powering ChatGPT and Claude apps",
-    "OpenClaw AI agent craze sweeps China as authorities seek to clamp down amid security fears  — adoption surges as state-run enterprises are barred from use",
-    "Crafty AI tool caught repurposing its training GPUs for unauthorized crypto mining during testing — experimental agent breached safety, controllability, and trustworthiness barriers"
+    "Nvidia's new open weights Nemotron 3 super combines three different architectures to beat gpt-oss and Qwen in throughput",
+    "The team behind continuous batching says your idle GPUs should be running inference, not sitting dark",
+    "Agents need vector search more than RAG ever did",
+    "RSAC's Innovation Sandbox is where cybersecurity's next giants are born",
+    "Perplexity’s Personal Computer turns your spare Mac into an AI agent - The Verge"
   ]
 }
