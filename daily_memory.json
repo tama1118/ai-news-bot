@@ -1,9 +1,9 @@
 {
   "last_topics": [
-    "Microsoft debuts DirectStorage 1.4 at GDC 2026, with Zstandard compression and GACL — update promises developers improved compression ratios, faster loading, and more",
-    "Exclusive | China’s ByteDance Gets Access to Top Nvidia AI Chips - WSJ",
-    "AMD's upcoming RDNA 5 GPUs might improve dual-issue execution & use shader units more efficiently — LLVM patch adds new FMA instruction to ease compiling - Tom's Hardware",
-    "Fixing AI failure: Three changes enterprises should make now",
-    "China bans OpenClaw from government computers and issues security guidelines amid adoption frenzy — nation scrambles to rein in popular AI agent"
+    "Nvidia introduces Vera Rubin, a seven-chip AI platform with OpenAI, Anthropic and Meta on board",
+    "Nvidia launches enterprise AI agent platform with Adobe, Salesforce, SAP among 17 adopters at GTC 2026",
+    "Nvidia's DGX Station is a desktop supercomputer that runs trillion-parameter AI models without the cloud",
+    "Nvidia BlueField-4 STX adds a context memory layer to storage to close the agentic AI throughput gap",
+    "z.ai debuts faster, cheaper GLM-5 Turbo model for agents and 'claws' — but it's not open-source"
   ]
 }
