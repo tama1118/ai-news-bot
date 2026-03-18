@@ -1,8 +1,9 @@
 {
   "last_topics": [
-    "Mistral AI launches Forge to help companies build proprietary AI models, challenging cloud giants",
-    "Nvidia's agentic AI stack is the first major platform to ship with security at launch, but governance gaps remain",
-    "Nvidia lets its 'claws' out: NemoClaw brings security, scale to the agent platform taking over AI",
-    "The authorization problem that could break enterprise AI"
+    "New MiniMax M2.7 proprietary AI model is 'self-evolving' and can perform 30-50% of reinforcement learning research workflow",
+    "Open source Mamba 3 arrives to surpass Transformer architecture with nearly 4% improved language modeling, reduced latency",
+    "Nvidia launches BlueField-4 STX storage architecture for agentic AI at GTC 2026",
+    "Enterprise AI agents keep operating from different versions of reality — Microsoft says Fabric IQ is the fix",
+    "Meta's new MTIA lineup joins hyperscalers' unified push for dedicated inferencing chips — companies diversify AI chips in effort to diversify from sole reliance on Nvidia"
   ]
 }
