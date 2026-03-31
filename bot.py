@@ -1,7 +1,7 @@
 import json
 import os
 import re
-import textwrap
+import html
 from datetime import datetime
 from urllib.parse import quote
 from zoneinfo import ZoneInfo
@@ -17,25 +17,31 @@ RSS_FEEDS = [
 ]
 
 KEYWORDS = [
-    "local llm","ollama","lm studio","qwen","deepseek","llama","gemma",
-    "mistral","mixtral","phi","vllm","rag","ai agent","agentic",
-    "inference","gpu","cuda","tensorrt","open source ai","open-source ai",
+    "local llm", "ollama", "lm studio", "qwen", "deepseek", "llama", "gemma",
+    "mistral", "mixtral", "phi", "vllm", "rag", "ai agent", "agentic",
+    "inference", "gpu", "cuda", "tensorrt", "open source ai", "open-source ai",
+    "open weights", "open-weight", "asr", "speech model", "rtx", "nvidia", "amd"
+]
+
+# Google News 側は broad すぎる "AI news" をやめる
+SEARCH_QUERIES = [
+    "local llm OR ollama OR lm studio OR vllm",
+    "qwen OR deepseek OR llama OR gemma OR mistral",
+    "gpu AI inference OR cuda OR tensorrt OR rtx"
 ]
 
 DISCORD_WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL", "")
 OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4.1-mini")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY", "")
 
-MAX_INITIAL_CANDIDATES = 20
-MAX_SEARCH_QUERIES = 3
-MAX_SEARCH_RESULTS_PER_QUERY = 5
-MAX_FINAL_CANDIDATES = 30
+MAX_FEED_ITEMS = 30
+MAX_SEARCH_RESULTS_PER_QUERY = 8
+MAX_FINAL_CANDIDATES = 20
 MAX_OUTPUT_ITEMS = 5
 
 HISTORY_FILE = "sent_articles.json"
 MEMORY_FILE = "daily_memory.json"
 
-# 🔥 これが重要（統一ヘッダー）
 REQUEST_HEADERS = {
     "User-Agent": "Mozilla/5.0 (compatible; AI-News-Bot/1.0)"
 }
@@ -49,45 +55,36 @@ def normalize_text(text):
     return " ".join((text or "").lower().split())
 
 
-def clean_summary_text(summary):
-    summary = re.sub(r"<[^>]+>", " ", summary or "")
-    summary = re.sub(r"\s+", " ", summary).strip()
-    return summary
-
-
-def extract_json_object(text):
-    text = text.strip()
-    try:
-        return json.loads(text)
-    except:
-        pass
-
-    match = re.search(r"\{.*\}", text, re.DOTALL)
-    if match:
-        return json.loads(match.group(0))
-
-    raise ValueError("JSON抽出失敗")
+def clean_text(text):
+    text = html.unescape(text or "")
+    text = re.sub(r"<[^>]+>", " ", text)
+    text = re.sub(r"\s+", " ", text).strip()
+    return text
 
 
 def load_history():
     try:
         with open(HISTORY_FILE, "r", encoding="utf-8") as f:
-            return set(json.load(f))
-    except:
+            data = json.load(f)
+            return set(data if isinstance(data, list) else [])
+    except Exception:
         return set()
 
 
 def save_history(history):
     with open(HISTORY_FILE, "w", encoding="utf-8") as f:
-        json.dump(list(history), f, ensure_ascii=False, indent=2)
+        json.dump(sorted(list(history)), f, ensure_ascii=False, indent=2)
 
 
 def load_memory():
     try:
         with open(MEMORY_FILE, "r", encoding="utf-8") as f:
-            return json.load(f)
-    except:
-        return {"last_topics": []}
+            data = json.load(f)
+            if isinstance(data, dict):
+                return data
+    except Exception:
+        pass
+    return {"last_topics": []}
 
 
 def save_memory(memory):
@@ -97,14 +94,42 @@ def save_memory(memory):
 
 def score_entry(title, summary):
     text = normalize_text(f"{title} {summary}")
-    return sum(1 for kw in KEYWORDS if kw in text)
+    score = 0
+
+    for kw in KEYWORDS:
+        if kw in text:
+            score += 2
+
+    # 強めに拾いたい単語
+    bonus_words = [
+        "open", "model", "models", "inference", "agent", "agents",
+        "voice", "speech", "gpu", "server", "api", "weights"
+    ]
+    for word in bonus_words:
+        if word in text:
+            score += 1
+
+    # ノイズ寄りを少し減点
+    penalty_words = [
+        "gaming pc", "deal", "discount", "sale", "monitor", "keyboard", "mouse"
+    ]
+    for word in penalty_words:
+        if word in text:
+            score -= 2
+
+    return score
 
 
 def resolve_final_url(url):
     try:
-        res = requests.get(url, headers=REQUEST_HEADERS, timeout=10)
+        res = requests.get(
+            url,
+            headers=REQUEST_HEADERS,
+            timeout=10,
+            allow_redirects=True
+        )
         return str(res.url)
-    except:
+    except Exception:
         return url
 
 
@@ -112,32 +137,59 @@ def suppress_discord_embeds(text):
     return re.sub(r"https?://[^\s>]+", lambda m: f"<{m.group(0)}>", text)
 
 
-# 🔥 User-Agent追加
+def split_message(text, max_len=1800):
+    lines = text.splitlines(True)
+    chunks = []
+    current = ""
+
+    for line in lines:
+        if len(current) + len(line) > max_len:
+            if current:
+                chunks.append(current)
+            current = line
+        else:
+            current += line
+
+    if current:
+        chunks.append(current)
+
+    return chunks
+
+
 def fetch_feed_items(feed_urls, sent_history):
     items = []
 
     for url in feed_urls:
-        feed = feedparser.parse(url, request_headers=REQUEST_HEADERS)
+        try:
+            feed = feedparser.parse(url, request_headers=REQUEST_HEADERS)
+        except Exception:
+            continue
 
-        for entry in feed.entries:
-            link = getattr(entry, "link", "")
-            if not link or link in sent_history:
+        for entry in getattr(feed, "entries", []):
+            raw_link = getattr(entry, "link", "")
+            if not raw_link:
                 continue
 
-            title = entry.title
-            summary = clean_summary_text(getattr(entry, "summary", ""))
+            link = resolve_final_url(raw_link)
+            if link in sent_history:
+                continue
 
-            if score_entry(title, summary) <= 0:
+            title = clean_text(getattr(entry, "title", ""))
+            summary = clean_text(getattr(entry, "summary", ""))
+
+            score = score_entry(title, summary)
+            if score <= 0:
                 continue
 
             items.append({
                 "title": title,
                 "summary": summary,
                 "link": link,
-                "score": 1
+                "source": url,
+                "score": score
             })
 
-    return items
+    return items[:MAX_FEED_ITEMS]
 
 
 def fetch_search_results(queries, sent_history):
@@ -145,21 +197,139 @@ def fetch_search_results(queries, sent_history):
 
     for q in queries:
         rss = f"https://news.google.com/rss/search?q={quote(q)}"
-        feed = feedparser.parse(rss, request_headers=REQUEST_HEADERS)
+        try:
+            feed = feedparser.parse(rss, request_headers=REQUEST_HEADERS)
+        except Exception:
+            continue
 
-        for entry in feed.entries:
-            link = resolve_final_url(entry.link)
+        count = 0
+        for entry in getattr(feed, "entries", []):
+            raw_link = getattr(entry, "link", "")
+            if not raw_link:
+                continue
+
+            link = resolve_final_url(raw_link)
             if link in sent_history:
                 continue
 
+            title = clean_text(getattr(entry, "title", ""))
+            summary = clean_text(getattr(entry, "summary", ""))
+
+            score = score_entry(title, summary)
+            if score <= 0:
+                continue
+
             items.append({
-                "title": entry.title,
-                "summary": clean_summary_text(getattr(entry, "summary", "")),
+                "title": title,
+                "summary": summary,
                 "link": link,
-                "score": 1
+                "source": f"google_news:{q}",
+                "score": score
             })
 
+            count += 1
+            if count >= MAX_SEARCH_RESULTS_PER_QUERY:
+                break
+
     return items
+
+
+def dedupe_items(items):
+    seen_links = set()
+    seen_titles = set()
+    unique = []
+
+    for item in items:
+        link = item["link"].strip()
+        title_key = normalize_text(item["title"])
+
+        if link in seen_links:
+            continue
+        if title_key in seen_titles:
+            continue
+
+        seen_links.add(link)
+        seen_titles.add(title_key)
+        unique.append(item)
+
+    return unique
+
+
+def pick_best_items(items, max_items=MAX_OUTPUT_ITEMS):
+    items = sorted(items, key=lambda x: x["score"], reverse=True)
+    return items[:max_items]
+
+
+def summarize_japanese(client, title, summary, link):
+    prompt = f"""
+以下のニュースを日本語で要約してください。
+
+要件:
+- 必ず日本語
+- 2文以内
+- できるだけ自然でわかりやすく
+- 誇張しない
+- タイトルの直訳だけで終わらせない
+- 40〜90文字くらいを目安
+- URLは出さない
+
+タイトル:
+{title}
+
+概要:
+{summary}
+
+URL:
+{link}
+""".strip()
+
+    response = client.chat.completions.create(
+        model=OPENAI_MODEL,
+        messages=[
+            {
+                "role": "system",
+                "content": "あなたはニュース要約アシスタントです。必ず簡潔で自然な日本語だけで答えてください。"
+            },
+            {
+                "role": "user",
+                "content": prompt
+            }
+        ],
+        temperature=0.3,
+    )
+
+    text = response.choices[0].message.content.strip()
+    text = clean_text(text)
+    return text
+
+
+def fallback_japanese_text(title, summary):
+    # API失敗時の最低限フォールバック
+    base = clean_text(summary) or clean_text(title)
+    if not base:
+        return "AI関連ニュースを取得しました。"
+    return f"{base[:85]}..." if len(base) > 85 else base
+
+
+def build_discord_message(client, items):
+    message = f"📡 AIニュース速報 ({now_jst_str()})\n\n"
+
+    for i, item in enumerate(items, 1):
+        try:
+            jp_summary = summarize_japanese(
+                client=client,
+                title=item["title"],
+                summary=item["summary"],
+                link=item["link"]
+            )
+        except Exception as e:
+            print(f"[WARN] summarize failed: {e}")
+            jp_summary = fallback_japanese_text(item["title"], item["summary"])
+
+        safe_link = suppress_discord_embeds(item["link"])
+        message += f"{i}. {jp_summary}\n{safe_link}\n\n"
+
+    return message.strip()
 
 
 def post_to_discord(message):
@@ -171,50 +341,43 @@ def post_to_discord(message):
         res = requests.post(
             DISCORD_WEBHOOK_URL,
             json={"content": chunk},
-            headers=REQUEST_HEADERS,  # 🔥 ここ追加
+            headers=REQUEST_HEADERS,
             timeout=30
         )
         res.raise_for_status()
-
-
-def split_message(text, max_len=1800):
-    lines = text.splitlines(True)
-    chunks, current = [], ""
-
-    for line in lines:
-        if len(current) + len(line) > max_len:
-            chunks.append(current)
-            current = line
-        else:
-            current += line
-
-    if current:
-        chunks.append(current)
-
-    return chunks
 
 
 def main():
     print("start")
 
     if not OPENAI_API_KEY:
-        raise RuntimeError("APIキーなし")
+        raise RuntimeError("OPENAI_API_KEY が設定されていません")
 
     client = OpenAI(api_key=OPENAI_API_KEY)
 
     history = load_history()
     memory = load_memory()
 
-    items = fetch_feed_items(RSS_FEEDS, history)
-    queries = ["AI news"]
+    feed_items = fetch_feed_items(RSS_FEEDS, history)
+    search_items = fetch_search_results(SEARCH_QUERIES, history)
 
-    items += fetch_search_results(queries, history)
-    items = items[:5]
+    items = feed_items + search_items
+    items = dedupe_items(items)
+    items = sorted(items, key=lambda x: x["score"], reverse=True)
+    items = items[:MAX_FINAL_CANDIDATES]
+    items = pick_best_items(items, MAX_OUTPUT_ITEMS)
 
-    message = "📡 AIニュース速報\n\n"
+    if not items:
+        message = f"📡 AIニュース速報 ({now_jst_str()})\n\n今日は条件に合うニュースが見つかりませんでした。"
+        print(message)
+        post_to_discord(message)
+        return
 
-    for i, item in enumerate(items, 1):
-        message += f"{i}. {item['title']}\n{item['link']}\n\n"
+    # 軽いメモリ更新
+    memory["last_topics"] = [item["title"] for item in items[:5]]
+    save_memory(memory)
+
+    message = build_discord_message(client, items)
 
     print(message)
     post_to_discord(message)
