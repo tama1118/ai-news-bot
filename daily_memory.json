@@ -1,9 +1,9 @@
 {
   "last_topics": [
-    "AI joins the 8-hour work day as GLM ships 5.1 open source LLM, beating Opus 4.6 and GPT-5.4 on SWE-Bench Pro",
-    "Amazon S3 Files gives AI agents a native file system workspace, ending the object-file split that breaks multi-agent pipelines",
-    "Block introduces Managerbot, a proactive Square AI agent and the clearest proof point yet for Jack Dorsey’s AI bet",
-    "Anthropic says its most powerful AI cyber model is too dangerous to release publicly — so it built Project Glasswing",
-    "AI-RAN is redefining enterprise edge intelligence and autonomy"
+    "Goodbye, Llama? Meta launches new proprietary AI model Muse Spark — first since Superintelligence Labs' formation",
+    "New framework lets AI agents rewrite their own skills without retraining the underlying model",
+    "Intel, SambaNova Bet on Split Inference as Agentic AI Strains GPUs - Data Center Knowledge",
+    "SambaNova and Intel Announce Blueprint for Heterogeneous Inference: GPUs for Prefill, SambaNova RDUs for Decode, and Intel® Xeon® 6 CPUs for Agentic Tools - PA Media",
+    "Intel and SambaNova team up on heterogenous AI inference platform — different hardware performs different workloads"
   ]
 }
