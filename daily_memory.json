@@ -1,9 +1,9 @@
 {
   "last_topics": [
-    "The AI governance mirage: Why 72% of enterprises don’t have the control and security they think they do",
-    "Three AI coding agents leaked secrets through a single prompt injection. One vendor's system card predicted it",
-    "Google’s new Deep Research and Deep Research Max agents can search the web and your private data",
-    "Kimi K2.6 runs agents for days — and exposes the limits of enterprise orchestration",
-    "Vercel breach exposes the OAuth gap most security teams cannot detect, scope or contain"
+    "Google’s Gemini can now run on a single air-gapped server — and vanish when you pull the plug",
+    "OpenAI launches Privacy Filter, an open source, on-device data sanitization model that removes personal information from enterprise datasets",
+    "Google doesn't pay the Nvidia tax. Its new TPUs explain why.",
+    "The modern data stack was built for humans asking questions. Google just rebuilt its for agents taking action.",
+    "Salesforce’s Agentforce Vibes 2.0 targets a hidden failure: context overload in AI agents"
   ]
 }
