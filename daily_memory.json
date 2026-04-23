@@ -1,9 +1,9 @@
 {
   "last_topics": [
-    "Google’s Gemini can now run on a single air-gapped server — and vanish when you pull the plug",
-    "OpenAI launches Privacy Filter, an open source, on-device data sanitization model that removes personal information from enterprise datasets",
-    "Google doesn't pay the Nvidia tax. Its new TPUs explain why.",
-    "The modern data stack was built for humans asking questions. Google just rebuilt its for agents taking action.",
-    "Salesforce’s Agentforce Vibes 2.0 targets a hidden failure: context overload in AI agents"
+    "OpenAI's GPT-5.5 is here, and it's no potato: narrowly beats Anthropic's Claude Mythos Preview on Terminal-Bench 2.0",
+    "Talking to AI agents is one thing — what about when they talk to each other? New startup BAND debuts 'universal orchestrator'",
+    "OpenAI unveils Workspace Agents, a successor to custom GPTs for enterprises that can plug directly into Slack, Salesforce and more",
+    "Scaling the AI-Ready Data Center with NVIDIA RTX PRO 4500 Blackwell Server Edition and NVIDIA vGPU 20 - NVIDIA Developer",
+    "Are you paying an AI ‘swarm tax’? Why single agents often beat complex systems"
   ]
 }
