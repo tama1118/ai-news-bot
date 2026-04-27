@@ -1,9 +1,9 @@
 {
   "last_topics": [
-    "Monitoring LLM behavior: Drift, retries, and refusal patterns",
-    "Dell’s AI Moment: Why Inference And CPUs (Not GPUs), Is Driving Next Growth Cycle (DELL) - Seeking Alpha",
-    "Intel has reportedly cancelled discrete gaming GPUs for the upcoming Xe3P Arc \"Celestial\" family — gaming GPU remains uncertain even for the next-gen Xe4 \"Druid\" lineup that lands in 2027",
-    "U.S. Commerce Secretary says Nvidia still hasn't sold any H200 AI GPUs to China — Chinese government is blocking imports in an attempt to push domestic semiconductor industry",
-    "Bolt Graphics tapes out its first Zeus GPU test chip on TSMC 12nm — firm touts 17x lower cost of compute"
+    "New AI framework autonomously optimizes training data, architectures and algorithms — outperforming human baselines",
+    "Why supply chains are the proving ground for automation‑led iPaaS",
+    "RAG precision tuning can quietly cut retrieval accuracy by 40%, putting agentic pipelines at risk",
+    "AI synthetic audiences are already here and poised to upend the consulting industry",
+    "Context decay, orchestration drift, and the rise of silent failures in AI systems"
   ]
 }
