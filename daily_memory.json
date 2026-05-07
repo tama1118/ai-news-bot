@@ -1,9 +1,9 @@
 {
   "last_topics": [
-    "Miami startup Subquadratic claims 1,000x AI efficiency gain with SubQ model; researchers demand independent proof.",
-    "The app store for robots has arrived: Hugging Face launches open-source Reachy Mini App Store with 200+ apps",
-    "AI agents are missing all the discussions your team is having. SageOX has an answer: agentic context infrastructure",
-    "One command turns any open-source repo into an AI agent backdoor. OpenClaw proved no supply-chain scanner has a detection category for it",
-    "Market research is too slow for the AI era, so Brox built 60,000 identical 'digital twins' of real people you can survey instantly, repeatedly"
+    "Meet ZAYA1-8B, a super efficient, open reasoning model trained on AMD Instinct MI300 GPUs",
+    "Why AI breaks without context — and how to fix it",
+    "Anthropic Skill scanners passed every check. The malicious code rode in on a test file.",
+    "AMD announces MI350P PCIe AI accelerator card with 144GB of HBM3E — roughly 40% faster in FP16 and FP8 theoretical compute compared to Nvidia's H200 NVL competitor",
+    "Announcing General Availability of OCI Compute with RTX PRO: Accelerating Multimodal AI and Visual Computing with NVIDIA RTX PRO Blackwell 6000 GPUs - Oracle Blogs"
   ]
 }
