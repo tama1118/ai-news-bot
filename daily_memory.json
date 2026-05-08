@@ -1,9 +1,9 @@
 {
   "last_topics": [
-    "Meet ZAYA1-8B, a super efficient, open reasoning model trained on AMD Instinct MI300 GPUs",
-    "Why AI breaks without context — and how to fix it",
-    "Anthropic Skill scanners passed every check. The malicious code rode in on a test file.",
-    "AMD announces MI350P PCIe AI accelerator card with 144GB of HBM3E — roughly 40% faster in FP16 and FP8 theoretical compute compared to Nvidia's H200 NVL competitor",
-    "Announcing General Availability of OCI Compute with RTX PRO: Accelerating Multimodal AI and Visual Computing with NVIDIA RTX PRO Blackwell 6000 GPUs - Oracle Blogs"
+    "5% GPU utilization: The $401 billion AI infrastructure problem enterprises can't keep ignoring",
+    "How Sakana trained a 7B model to orchestrate GPT, Claude and Gemini LLMs",
+    "Anthropic introduces \"dreaming,\" a system that lets AI agents learn from their own mistakes",
+    "An AI agent rewrote a Fortune 50 security policy. Here's how to govern AI agents before one does the same.",
+    "Governance, not gatekeeping: How SAP brings enterprise‑grade safety to AI connectivity"
   ]
 }
