@@ -1,9 +1,9 @@
 {
   "last_topics": [
-    "Anthropic reinstates OpenClaw and third-party agent usage on Claude subscriptions — with a catch",
-    "Cerebras stock nearly doubles on day one as AI chipmaker hits $100 billion — what it means for AI infrastructure",
-    "Enterprises can now train custom AI models from production workflows — no ML team required",
-    "AI IQ is here: a new site scores frontier AI models on the human IQ scale. The results are already dividing tech.",
-    "Agent authorization is broken — and authentication passing makes it worse"
+    "How RecursiveMAS speeds up multi-agent inference by 2.4x and reduces token usage by 75%",
+    "Claude’s next enterprise battle is not models: it’s the agent control plane",
+    "Claude Code's '/goals' separates the agent that works from the one that decides it's done",
+    "Fully-functional RTX 3070 16GB gets frankensteined into existence by harvesting dead PCBs and RX 6800 XT's VRAM chips — doubles frame rate in games like Spider Man 2 at 4K and includes switch for 8GB mode",
+    "Developers can now debug and evaluate AI agents locally with Raindrop's open source tool Workshop"
   ]
 }
