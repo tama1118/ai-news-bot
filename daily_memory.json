@@ -1,9 +1,9 @@
 {
   "last_topics": [
-    "Google says Gemini 3.5 Flash can slash enterprise AI costs by more than $1 billion a year",
-    "Context architecture is replacing RAG as agentic AI pushes enterprise retrieval to its limits",
-    "OpenAI co-founder Andrej Karpathy announces he's joining Anthropic",
-    "Claude agents can finally connect to enterprise APIs without leaking credentials",
-    "Google just redesigned the search box for the first time in 25 years — here’s why it matters more than you think."
+    "Cohere cracks lossless quantization and native citations with first full Apache 2.0 licensed open model Command A+",
+    "Cerebras says its chips run a trillion-parameter AI model nearly 7 times faster than GPU clouds",
+    "Corti's new Symphony for Speech-to-Text model beats OpenAI at medical terminology accuracy, highlighting the value of specialized AI",
+    "GitHub confirms 3,800 internal repos stolen through poisoned VS Code extension as supply chain worm hits Microsoft’s Python SDK",
+    "AWS nabs white hot gen AI media creation startup fal, becoming its preferred cloud provider"
   ]
 }
