@@ -1,9 +1,9 @@
 {
   "last_topics": [
-    "MeMo's memory model lets teams upgrade their LLM without retraining it — and performance jumps 26%",
-    "Pinterest cut AI costs 90% by gutting a frontier model's vision layer",
-    "AI agents are entering their rebuild era as enterprises confront the reliability problem",
-    "Intel challenges AMD’s handheld dominance with new Arc G3 chips — Panther Lake silicon brings up to 14 cores, Arc B390 graphics to handhelds",
-    "Acer brings Intel Arc B390 graphics to Predator Atlas 8 gaming handheld – G3 Extreme CPU paired with segment-first metal fan for increased airflow"
+    "The AI agent bottleneck isn't model performance — it's permissions",
+    "ASRock BC-250 used for Steam Machine duty gains third-party hack to unlock all 40 CUs — mining board now has more CUs than a base PS5",
+    "Comprehensive observability for Amazon SageMaker AI LLM inference: From GPU utilization to LLM quality - Amazon Web Services (AWS)",
+    "Nvidia offers restricted access to Vera CPU in first round of Linux benchmarks - 88-core monster competes with or beats Epyc and Xeon in selected tests",
+    "NVIDIA Dynamo Snapshot: Fast Startup for Inference Workloads on Kubernetes | NVIDIA Technical Blog - NVIDIA Developer"
   ]
 }
