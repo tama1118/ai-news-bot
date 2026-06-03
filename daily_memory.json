@@ -1,9 +1,9 @@
 {
   "last_topics": [
-    "Microsoft debuts Surface RTX Spark Dev Box to run large AI models without cloud costs",
-    "Perplexity AI unveils hybrid local-cloud inference system at Computex 2026",
-    "The Agentic Reckoning: Enterprise AI organizations have a runtime problem, not a model problem — and most are building the wrong solution",
-    "Enterprise AI agents keep creating data silos. Microsoft's Build answer is Microsoft IQ and Rayfin.",
-    "AI agents keep giving confident wrong answers. The context layer is enterprise AI's next production problem."
+    "Alibaba's Qwen3.7-Plus supports text, video and imagery inputs at low cost of $0.4/$1.6 per 1M token — but it's proprietary",
+    "Google's new open source Gemma 4 12B analyzes audio, video — and runs entirely locally on a typical 16GB enterprise laptop",
+    "Microsoft launches MXC, an OS-level sandbox for AI agents, with OpenAI and Nvidia already on board",
+    "Microsoft and OpenAI broke up — now they’re ready to fight",
+    "Microsoft debuts Surface RTX Spark Dev Box — Nvidia-powered mini-PC helps devs get ready for an agentic Windows"
   ]
 }
