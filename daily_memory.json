@@ -1,9 +1,9 @@
 {
   "last_topics": [
-    "Agentic AI solved coding — and exposed every other problem in software engineering",
-    "AMD's RDNA 5 gaming GPUs are coming late next year, according to AIBs at Computex — manufacturers expect new Team Red cards in the second half of 2027 alongside Nvidia",
-    "Demand for data center CPUs has surged, and AI agents are responsible – why the CPU to GPU ratio is more important than ever for hyperscalers",
-    "I stopped fighting LM Studio's model UI and switched to Ollama — setup took minutes instead of hours - MakeUseOf",
-    "Ludicrous overclock slams 1.7 volts into 6700K in an attempt to stop CPU from bottlenecking an RTX 3080 — 5.2 GHz on aging four-core pushes GPU utilization from 60% to 74%"
+    "Researchers trained an open source AI search agent, Harness-1, that outperforms GPT-5.4 on recalling relevant information",
+    "On-device AI agents hit a hard memory limit. Apple's new architecture routes around it.",
+    "Apple’s new Siri AI is more than just a smarter assistant — it's a new enterprise app layer",
+    "Cohere open-sources a coding agent that runs on a single H100",
+    "Anthropic brings Mythos to the masses with Claude Fable 5, its most powerful generally available model ever"
   ]
 }
