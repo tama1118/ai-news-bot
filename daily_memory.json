@@ -1,9 +1,9 @@
 {
   "last_topics": [
-    "Researchers trained an open source AI search agent, Harness-1, that outperforms GPT-5.4 on recalling relevant information",
-    "On-device AI agents hit a hard memory limit. Apple's new architecture routes around it.",
-    "Apple’s new Siri AI is more than just a smarter assistant — it's a new enterprise app layer",
-    "Cohere open-sources a coding agent that runs on a single H100",
-    "Anthropic brings Mythos to the masses with Claude Fable 5, its most powerful generally available model ever"
+    "Researchers say they trained a foundation model from scratch for about $1,500",
+    "Anthropic CEO calls for FAA-style regulation of powerful AI models: what enterprises should know",
+    "MassMutual's AI strategy: 12-month contracts, 30% productivity gains, zero lock-in",
+    "AMD's Lemonade SDK For Local AI Adds NVIDIA CUDA Support - Phoronix",
+    "Stop Wasting GPU Budget: Autoscaling AI Inference on Kubernetes with KEDA - Cloud Native Now"
   ]
 }
