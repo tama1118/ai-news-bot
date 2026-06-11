@@ -1,9 +1,9 @@
 {
   "last_topics": [
-    "Researchers say they trained a foundation model from scratch for about $1,500",
-    "Anthropic CEO calls for FAA-style regulation of powerful AI models: what enterprises should know",
-    "MassMutual's AI strategy: 12-month contracts, 30% productivity gains, zero lock-in",
-    "AMD's Lemonade SDK For Local AI Adds NVIDIA CUDA Support - Phoronix",
-    "Stop Wasting GPU Budget: Autoscaling AI Inference on Kubernetes with KEDA - Cloud Native Now"
+    "Google's DiffusionGemma generates 256 tokens in parallel and self-corrects as it goes",
+    "Microsoft’s open-source SkillOpt automatically upgrades AI agent skills without touching model weights",
+    "Context compression finally works in production: new research cuts LLM input 16x without the accuracy hit",
+    "Surprise upset: GPT-5.5 beats Claude Fable 5 on brutal new Agents’ Last Exam benchmark",
+    "What AI benchmarks miss about real-world performance"
   ]
 }
