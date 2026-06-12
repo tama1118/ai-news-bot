@@ -1,9 +1,9 @@
 {
   "last_topics": [
-    "Google's DiffusionGemma generates 256 tokens in parallel and self-corrects as it goes",
-    "Microsoft’s open-source SkillOpt automatically upgrades AI agent skills without touching model weights",
-    "Context compression finally works in production: new research cuts LLM input 16x without the accuracy hit",
-    "Surprise upset: GPT-5.5 beats Claude Fable 5 on brutal new Agents’ Last Exam benchmark",
-    "What AI benchmarks miss about real-world performance"
+    "Xiaomi's new open source, agentic AI coding harness MiMo Code beats Claude Code at ultra-long, 200+ step tasks",
+    "Kimi K2.7-Code cuts thinking tokens 30% — but practitioners say the benchmarks don't check out",
+    "PixelRAG beats text parsers on accuracy and cuts AI agent token costs 10x",
+    "AMD Instinct MI355X GPU Sets a New Bar for DeepSeek Inference - AMD",
+    "NanoClaw and JFrog launch 'immune system' to block AI agents from downloading malicious code"
   ]
 }
