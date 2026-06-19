@@ -1,9 +1,9 @@
 {
   "last_topics": [
-    "Adobe embeds agentic AI workflows across Creative Cloud, shifting from media generation to production orchestration",
-    "New AI optimization framework beats Claude Code and Codex by 2.5x on the same compute budget",
-    "Copilot searched your mailbox. LiteLLM handed out admin keys. Run this 5-check audit before your stack is next",
-    "AWS enters the context layer race with a graph that learns from agents, not manual curation",
-    "Announcing Amazon EC2 G7 instances accelerated by NVIDIA RTX PRO 4500 Blackwell Server Edition GPUs - Amazon Web Services"
+    "Fine-tuning forgets. RAG leaks context. Hypernetworks build the model your agent needs on demand.",
+    "7,000 Langflow servers are under attack. LangGraph and LangChain have the same holes",
+    "Scammers in China sell $222 RTX 4090 with fake GPU die made out of plastic instead of real silicon — marked with 2030 production dates, the card didn't even have working VRAM",
+    "Anthropic's Claude Code Artifacts update brings live, shared dashboards and interactive workspaces to enterprises",
+    "Ditching the cloud for local AI — how I use two mini PCs to process millions of tokens a day and save money on costly API fees"
   ]
 }
