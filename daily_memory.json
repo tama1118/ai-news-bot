@@ -1,9 +1,9 @@
 {
   "last_topics": [
-    "Fine-tuning forgets. RAG leaks context. Hypernetworks build the model your agent needs on demand.",
-    "7,000 Langflow servers are under attack. LangGraph and LangChain have the same holes",
-    "Scammers in China sell $222 RTX 4090 with fake GPU die made out of plastic instead of real silicon — marked with 2030 production dates, the card didn't even have working VRAM",
-    "Anthropic's Claude Code Artifacts update brings live, shared dashboards and interactive workspaces to enterprises",
-    "Ditching the cloud for local AI — how I use two mini PCs to process millions of tokens a day and save money on costly API fees"
+    "Nvidia releases RTX Remix 1.5 with new RTX IO compression reducing mod file sizes by up to 37% — update also adds Smooth Normals and 'RTX Remix Skills' Agents",
+    "Most people use Ollama or llama.cpp for local LLMs, but these are the tools I switch to when it gets serious - XDA",
+    "Ollama Review: The Best Open-Source Local AI Platform - quasa.io",
+    "Gemma 4 on Cerebras—The Fastest Inference is Now Multimodal - Cerebras",
+    "Nvidia’s Share of AI Inference Chip Market Appears to Be Rising - The Information"
   ]
 }
