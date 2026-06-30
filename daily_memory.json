@@ -1,9 +1,9 @@
 {
   "last_topics": [
-    "DeepSeek open sources DSpark, a new framework to speed up LLM inference by up to 85%",
-    "The attack that hijacked Claude Code came through Sentry. Datadog, PagerDuty, and Jira have the same exposure.",
-    "Prompt injection is exploiting enterprise AI's biggest design flaws by targeting agents, RAG pipelines and model routers",
-    "CUDA emulator for AMD GPUs Zluda loses funding with v6 release — embattled project goes back to hobby status but now includes 32-bit PhysX support",
-    "Legacy Nvidia RTX 3060 12GB returns to retail five years after original launch, priced at $339 — resurrected GPU strategy that Jensen called a 'good idea' apparently comes to fruition"
+    "Meituan open sources LongCat-2.0, the 1.6T, near-frontier agentic coding model that's been leading OpenRouter — trained entirely on Chinese chips",
+    "AI agents need context everywhere they run, even where the cloud can't follow",
+    "Google unveils Nano Banana 2 Lite aka Gemini 3.1 Flash-Lite for low cost, 4-second fast enterprise image generations",
+    "DeepSeek open sources DSpark, a new framework to speed up LLM inference by up to 85% - VentureBeat",
+    "Anthropic launches Claude Sonnet 5 at a steep discount to its top model as the company races toward a blockbuster IPO"
   ]
 }
