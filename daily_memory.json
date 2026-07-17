@@ -1,9 +1,9 @@
 {
   "last_topics": [
-    "China’s Moonshot AI releases Kimi K3, the largest open-source model ever, rivaling top U.S. systems",
-    "The AI compute gap: Enterprises are buying infrastructure faster than they can measure what it costs",
-    "Zero trust must now move at agent speed",
-    "The agent security gap: 54% of enterprises have already had an AI agent incident, and most still let agents share credentials",
-    "The agent evaluation gap: Enterprise AI organizations have a reality-alignment problem, not a coverage problem — and most are shipping to production anyway"
+    "Brex built its AI agent policy by watching what agents actually do, not by writing rules first",
+    "Intuit scrapped its own AI agent architecture twice in four months. At VB Transform 2026, its AI VP called that the fast path",
+    "Agents think in milliseconds, legacy infrastructure doesn't. LinkedIn, Walmart and Zendesk shared how they closed the gap at VB Transform 2026",
+    "Capital One releases VulnHunter, an open-source AI tool that finds software flaws before hackers do",
+    "LM Studio expands beyond chat with Bionic, a new AI agent app for open models - 9to5Mac"
   ]
 }
