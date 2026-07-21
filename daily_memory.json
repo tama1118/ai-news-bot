@@ -1,9 +1,9 @@
 {
   "last_topics": [
-    "Writer's AI harness cuts token spend nearly 40% — without sacrificing accuracy",
-    "Safety guardrails blocked Hugging Face's defenders, not the attacker, when an AI agent breached its systems",
-    "A single AI agent conversation can look perfect and still be broken, leaders from LangChain, Conviva and CoreWeave said at VB Transform 2026",
-    "Trump administration reportedly reviving push to ban Chinese AI models following Kimi K3 launch, citing cybersecurity concerns — downloadable open weights could make an outright U.S. ban nearly impossible to enforce amid growing adoption",
-    "New plugin unlocks granular VRAM temperature tracking on Nvidia RTX 50-series GPUs — community cracks open Blackwell's forbidden telemetry sensors"
+    "Google's Gemini 3.6 Flash model cuts AI agent token costs by up to 65% on long horizon engineering tasks —and 3.5 Pro is on the way",
+    "Stop adding more GPUs: Weka's new storage platform reduces load by caching 100% of an AI model's pre-calculated tokens",
+    "Nvidia has shipped 'hundreds of thousands of Grace standalone servers’ — GPU firm pivots messaging as CPUs take center stage in agentic data centers",
+    "Nvidia details Rubin architectural optimizations for inference – improvements target better performance and efficiency from the GPU to the rack",
+    "Inside NVIDIA Rubin GPU Architecture: Powering the Era of Agentic AI - NVIDIA Developer"
   ]
 }
