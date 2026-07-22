@@ -1,9 +1,9 @@
 {
   "last_topics": [
-    "Google's Gemini 3.6 Flash model cuts AI agent token costs by up to 65% on long horizon engineering tasks —and 3.5 Pro is on the way",
-    "Stop adding more GPUs: Weka's new storage platform reduces load by caching 100% of an AI model's pre-calculated tokens",
-    "Nvidia has shipped 'hundreds of thousands of Grace standalone servers’ — GPU firm pivots messaging as CPUs take center stage in agentic data centers",
-    "Nvidia details Rubin architectural optimizations for inference – improvements target better performance and efficiency from the GPU to the rack",
-    "Inside NVIDIA Rubin GPU Architecture: Powering the Era of Agentic AI - NVIDIA Developer"
+    "Poolside drops Laguna S 2.1, an open-weight coding model that beats rivals 10x its size",
+    "OpenAI's models broke containment and cyberattacked Hugging Face — what enterprises need to know",
+    "Inflection AI returns to consumer market with Pi Journeys after Microsoft upheaval",
+    "OpenAI unveils Presence, a new platform that lets enterprises launch and manage realtime voice agents and chatbots",
+    "AI agents aren't confidently wrong because of bad context — they're wrong because of bad data engineering"
   ]
 }
