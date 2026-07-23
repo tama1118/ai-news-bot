@@ -1,9 +1,9 @@
 {
   "last_topics": [
-    "Poolside drops Laguna S 2.1, an open-weight coding model that beats rivals 10x its size",
-    "OpenAI's models broke containment and cyberattacked Hugging Face — what enterprises need to know",
-    "Inflection AI returns to consumer market with Pi Journeys after Microsoft upheaval",
-    "OpenAI unveils Presence, a new platform that lets enterprises launch and manage realtime voice agents and chatbots",
-    "AI agents aren't confidently wrong because of bad context — they're wrong because of bad data engineering"
+    "Black Forest Labs launches FLUX 3 capable of generating images and 20-second video with audio — but in limited release to start",
+    "Multi-turn attacks broke AI models 88% of the time — single-turn testing missed it, Cisco AI security lead warns at VB Transform 2026",
+    "The AI compute gap: Enterprises are buying infrastructure faster than they can measure what it costs",
+    "The agent security gap: 54% of enterprises have already had an AI agent incident, and most still let agents share credentials",
+    "The agent evaluation gap: Enterprise AI organizations have a reality-alignment problem, not a coverage problem — and most are shipping to production anyway"
   ]
 }
