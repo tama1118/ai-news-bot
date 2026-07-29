@@ -1,9 +1,9 @@
 {
   "last_topics": [
-    "Kimi K3's full weights are here, but they're 'open' with a caveat: What enterprises should know",
-    "MCP just got its biggest update ever — here’s what changes for AI agents",
-    "GM redesigned its engineering workflows around AI agents — and tripled its merged pull requests",
-    "Runway couldn't fix a bug in its AI video model, so it turned the bug into a feature",
-    "Fiduciary AI: Agents need to prove trustworthiness, not just ability"
+    "Enterprise AI agents can't talk to each other, can't be trusted with permissions, and can't be audited — 5 startups are already fixing that",
+    "At Waymo, an AI project isn't ready until its evals are — not when the model performs well",
+    "Visa used Mythos to hunt for bugs in its own payment network, then open-sourced the harness that made it possible",
+    "Nimble claims its new, domain-specialized Web Search Agents cut token costs in half while boosting retrieval accuracy",
+    "Target SVP says its real AI moat isn't the models — it's everything built around them"
   ]
 }
