@@ -1,9 +1,9 @@
 {
   "last_topics": [
-    "GLM-5.3-Flash will likely handle 45% of your AI workloads",
-    "Visa ships a security AI that patches production code before any human reviews it",
-    "Hot Chips 2026: OpenAI's Jalapeño AI ASIC unpacked — accelerator developed using AI achieves efficiency and throughput gains against power-hungry Blackwell",
-    "NVIDIA Nemotron 3.5: Free 30B Model, $89B GPU Bet [2026] - tech-insider.org",
-    "When agents act on their own, governance has to live in the data layer"
+    "Cohere Parse 5 loses the benchmark on points. It wins on cost per page.",
+    "Meta researchers taught an 8B AI model to match Claude Opus 4.5 — without the frontier price tag",
+    "The three layers of agentic AI security: A defense-in-depth architecture for autonomous agents",
+    "DLSS 5 has already been ported to work on RTX 4000 Series graphics cards — incompatible CUDA instructions get patched to work on previous-gen hardware",
+    "Deploy an Open Model from Checkpoint to Inference in Two Commands with NVIDIA TensorRT Model Connect - NVIDIA Developer"
   ]
 }
