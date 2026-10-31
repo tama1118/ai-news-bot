@@ -1,9 +1,9 @@
 {
   "last_topics": [
-    "A primer on key AI LLM concepts — KV cache, weights, quantization, and how inference actually works",
-    "Ollama and LM Studio: How to make sure your local AI stays offline - Notebookcheck",
-    "Busy GPUs can hide slow AI inference on Kubernetes - The New Stack",
-    "Darkbloom, which allowed Mac users to rent out their GPUs for AI inference, warns of low payouts - The Register",
-    "‘Put every prompt in its place’: Intel launches 480GB GPU D-series for AI inference - TechRadar"
+    "UEFI-level pre-driver Nvidia GPU unlocker now available for RTX 2xxx, 3xxx and 4xxx GPUs on Windows and Linux - Notebookcheck",
+    "Benchmarking Nvidia’s Vera CPU for the data center — standalone Vera tested against Granite Rapids-AP and EPYC Turin",
+    "Qualcomm bets its AI inference chips can chip away at Nvidia before 2029 - Startup Fortune",
+    "Free firmware unlock nearly doubles AI speed on your RTX 30 and 40 GPU - MakeUseOf",
+    "3 Ways to Boost MoE Inference on NVIDIA DGX Spark | NVIDIA Technical Blog - NVIDIA Developer"
   ]
 }
