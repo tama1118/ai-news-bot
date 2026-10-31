@@ -1,9 +1,9 @@
 {
   "last_topics": [
-    "Nvidia GeForce RTX 5080 prices hit $2,000, costing more than the RTX 5090 did at launch and with limited stock available",
-    "Mistral says its new model, Large 4, is the best open model for agentic coding and cyber defense - Fortune",
-    "Mistral Says Its AI Model ‘Le Chonk’ Has Leapfrogged China in the Open-Weight Race - WIRED",
-    "Smaller apps and faster GPU inference with LiteRT in Google Play services - Google for Developers Blog",
-    "GitHub says massive influx of AI-generated code required extra 4 million CPU cores and 160 petabytes of storage to manage"
+    "A primer on key AI LLM concepts — KV cache, weights, quantization, and how inference actually works",
+    "Ollama and LM Studio: How to make sure your local AI stays offline - Notebookcheck",
+    "Busy GPUs can hide slow AI inference on Kubernetes - The New Stack",
+    "Darkbloom, which allowed Mac users to rent out their GPUs for AI inference, warns of low payouts - The Register",
+    "‘Put every prompt in its place’: Intel launches 480GB GPU D-series for AI inference - TechRadar"
   ]
 }
