@@ -1,9 +1,9 @@
 {
   "last_topics": [
-    "Perplexity launches its own take on AI agents for work",
-    "Chinese AI lab Moonshot reportedly looked at European data centers to access Nvidia chips, report claims",
-    "Open Models Crowd the Top as Kimi and Mistral Match the Frontier - PYMNTS.com",
-    "Supermicro taps SambaNova to power AI inference racks alongside Nvidia - Fierce Network",
-    "Nvidia Weighs Apollo-Backed Telecom Sites for 1GW AI Inference Push - BigGo Finance"
+    "AWS Adds NVIDIA GPU Partitioning to SageMaker Inference Endpoints - Unite.AI",
+    "SageMaker Inference now supports Multi-Instance GPU to maximize GPU utilization for model endpoints - Amazon Web Services (AWS)",
+    "Supermicro, IBM, and NVIDIA Cut Inference Latency 56x With KV Cache on Shared Storage - The Futurum Group",
+    "How to double your NVIDIA RTX card’s tensor speed with 'gpu-unlock' - MakeUseOf",
+    "Mira Murati’s Inkling 2 Overtakes Mistral as the Top Open-Weight Model Outside China - trendingtopics.eu"
   ]
 }
