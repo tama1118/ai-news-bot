@@ -197,6 +197,7 @@
   "https://news.google.com/rss/articles/CBMijAFBVV95cUxOeXdXMmhSNVFGZWk5amVEbWF3RlNLTWtoMWpzMnlYMlBUWV8weVEzWTNERHhYTE5abXdROFlHMjhRb05wcUZYRXNueEM1VnI3cVIzdWowY0JHUUlvMlpPMVFoQXVqYTJTV3lKS1Jad1BfenY0VEhIN2JOU0Q4bkhtbHlpSndJZnZxUTFCTQ?oc=5&hl=en-US&gl=US&ceid=US:en",
   "https://news.google.com/rss/articles/CBMijAFBVV95cUxPNENrR3pnRjNOOWV1b2U0WS1qcXdhM3ZPcWlieGlEdmxvWVhsRWY3Zm1zUXVZQXNfYVE2cjFJd2w1X0hiUlBBYTJKSk1LR0R4ZTd0V1dtY0xHUk1MbVFJTW5HaGVpMHNWeFprdkFnZW1jdHBVaDczc1RRcXNkU1VYMFd1Z3d1eGJzbUY0aA?oc=5&hl=en-US&gl=US&ceid=US:en",
   "https://news.google.com/rss/articles/CBMijAFBVV95cUxPTXAtZHRHWDBfTWJfdTVybkpDWXA1RmtYZDViTWh0akVCQkQ1RWp1bU93b0VXbmNCcTdTVUFrRm9LVE9BUm04RHNMVDlaeXhrUUZrLVVJS1R0eGhPNmZOdHZRNEZHRDFjRThEenFjTWFvLVBmRTMyN1ZCbHRpQ1pGVzlBMWNLUU10M2ZWTQ?oc=5&hl=en-US&gl=US&ceid=US:en",
+  "https://news.google.com/rss/articles/CBMijgFBVV95cUxNVDBESEZYRWtjdC1HcHQ2M3h1N0duMzRjbzZ3dnhtWEpqN3NuM0s2WjNOV3FPb3ppUVJCSlBoNC14LU45Rk1lUE5fZGRjNWFNd3NTOW1MTElwaVhrS0s2dFBveC05ejhGeG9XejlrVU9vQV9tMFhDSExyY1NYcDQ1T2lhWHFWS0ZsSlRjUHZn?oc=5&hl=en-US&gl=US&ceid=US:en",
   "https://news.google.com/rss/articles/CBMijgFBVV95cUxOTjJzSU96N3RCc183d1UtUXZuMi1GWHhMN1NqN1FLV3hxMnJ2eGVUbUM4RHFpM0JIMTNvZkczSVpnUWtyMmpwaFI5QWlVclhsWVo0WTJtWkxyMjA4eGtJcXhpY0djeEZ4ZnhJX3NBdUV3TGtZYW9DZHhpTEdLN3d4SGl0NFY4WWtickFBUGFn?oc=5&hl=en-US&gl=US&ceid=US:en",
   "https://news.google.com/rss/articles/CBMijgFBVV95cUxPUXBaVFc4clp1dzNxdW93Sy1uS2RabVdmUFFhTEFLMTliZUN5aVd0cS1lMWZ5bXNZcHV2LWJEMnNESlFodmNpcFB3MWx4cDdpcnE1NlhLYVl2bXlELV9qYmJnNWE2Q3R0SEFwVVg5ektETTZ6c0FXX2JoN1pqbkp6Z1hjQVlORU5naFlfcVVR?oc=5&hl=en-US&gl=US&ceid=US:en",
   "https://news.google.com/rss/articles/CBMijgFBVV95cUxQT1ptSVFXeUQzc1gtNzhzQmpsbGJSdHd1RndnSm0zMWRkcWV5dHNVZk5pWUFzaUZyQzlPZ25GMHhRemY4cVBUUkFhU1JoeUo4Z0RWVlZVNHhnRV9mYWlBNlJXNjZUcC1Dd2dnQ0tmZVMxTkdHMEhhazFuazBQRTlWeUsxWHZwSU0zZE1UZTNn?oc=5&hl=en-US&gl=US&ceid=US:en",
@@ -931,6 +932,7 @@
   "https://www.theverge.com/ai-artificial-intelligence/1032125/ai-agents-maya-site-archeology-discovery",
   "https://www.theverge.com/ai-artificial-intelligence/1032518/claude-duet-ai-agent-hands-on",
   "https://www.theverge.com/ai-artificial-intelligence/1033425/openai-chatgpt-wallet",
+  "https://www.theverge.com/ai-artificial-intelligence/1034815/california-openai-hugging-face-lawsuit",
   "https://www.theverge.com/ai-artificial-intelligence/892178/meta-moltbook-acquisition-ai-agents",
   "https://www.theverge.com/ai-artificial-intelligence/893536/perplexitys-personal-computer-turns-your-spare-mac-into-an-ai-agent",
   "https://www.theverge.com/ai-artificial-intelligence/899823/arm-agi-cpu-meta",
@@ -1194,8 +1196,10 @@
   "https://www.tomshardware.com/tech-industry/artificial-intelligence/a-primer-on-key-ai-llm-concepts-kv-cache-weights-quantization-and-how-inference-actually-works",
   "https://www.tomshardware.com/tech-industry/artificial-intelligence/ai-agent-deletes-tv-shows-entire-edit-weeks-before-release-backup-failure-means-production-team-needs-to-re-edit",
   "https://www.tomshardware.com/tech-industry/artificial-intelligence/ai-cost-crisis-hits-tech-giants-as-employee-tokenmaxxing-backfires-agentic-ai-eats-up-to-1000x-more-tokens-than-standard-ai-sparks-corporate-pullback-at-microsoft-meta-and-amazon",
+  "https://www.tomshardware.com/tech-industry/artificial-intelligence/ai-safety-legislation-has-a-conflict-of-interest-problem-big-us-labs-are-warning-of-risk-just-as-cheaper-chinese-open-weight-models-erode-their-commercial-edge",
   "https://www.tomshardware.com/tech-industry/artificial-intelligence/alibaba-claims-new-qwen-image-2-1-ai-model-beats-google-nano-banana-2-0-with-minuscule-7b-parameter-model-benchmarks-show-open-weight-contender-is-competitive-with-openai-and-meta-image-models",
   "https://www.tomshardware.com/tech-industry/artificial-intelligence/amds-helios-mi455x-ai-platform-breaks-cover-initial-systems-use-ualink-over-ethernet-interconnects-amds-vera-rubin-rival-surfaces-but-the-downsides-of-ethernet-could-hamstring-performance",
+  "https://www.tomshardware.com/tech-industry/artificial-intelligence/anthropic-says-claude-mythos-slashed-software-work-to-onboard-amd-gpus-from-up-to-12-months-to-around-three-days-writing-almost-100-percent-of-kernels-autonomously-chips-away-at-nvidias-cuda-moat",
   "https://www.tomshardware.com/tech-industry/artificial-intelligence/apple-researchers-turn-idle-macs-into-a-virtual-gpu-cloud-with-minions-researchers-say-the-distributed-scheme-could-scale-globally-and-support-model-training",
   "https://www.tomshardware.com/tech-industry/artificial-intelligence/australian-pm-says-openai-took-84-days-to-email-agency-after-agent-hacked-its-national-health-care-portal-incident-is-believed-to-be-the-first-known-case-of-ai-breaching-a-government-site",
   "https://www.tomshardware.com/tech-industry/artificial-intelligence/bain-capitals-data-center-unit-removes-disgraced-tenant-suspected-of-smuggling-nvidia-gpus-to-china-megaspeed-previously-alleged-to-have-spent-roughly-usd2-billion-on-ai-processors-for-illicit-distribution",
@@ -1290,5 +1294,6 @@
   "https://www.tomshardware.com/video-games/pc-gaming/pragmata-pc-performance-review",
   "https://www.tomshardware.com/video-games/pc-gaming/we-tested-dlss-5-in-nba-2k27-with-every-rtx-50-series-gpu-first-official-release-comes-with-a-big-performance-hit-but-almost-every-blackwell-card-can-run-it-at-1080p",
   "https://www.tomshardware.com/video-games/playstation/anyps5-reaches-critical-gpu-milestone-with-100-percent-shader-instruction-coverage-ps5-games-running-natively-on-pc-still-far-off",
+  "https://www.tomshardware.com/video-games/playstation/jailbroken-ps4-runs-9-billion-parameter-ai-model-at-up-to-43-tokens-per-second-open-source-garlic-llm-bypasses-drivers-to-talk-directly-to-the-2013-era-gpu",
   "https://www.tomshardware.com/video-games/playstation/jailbroken-ps5s-can-now-run-local-ai-models-at-over-100-tokens-per-second-fork-of-ps5lm-goes-native-and-accesses-gpu-and-more-ram"
 ]
